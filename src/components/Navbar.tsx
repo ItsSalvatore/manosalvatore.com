@@ -47,19 +47,24 @@ const Navbar = () => {
       <div className="container mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between">
           <a href="/" className="flex items-center space-x-4">
-            <span className="text-2xl font-display font-bold">
-              <span className="text-electric-red">Salvatore</span>
-              <span className="font-light text-white">Dev</span>
-            </span>
+            <img 
+              src="/lovable-uploads/cd5c5f8f-0e54-4467-815e-d196aaa79c37.png" 
+              alt="Salvatore Logo" 
+              className="h-8 w-8 mr-2"
+            />
+            
+            <img 
+              src="/lovable-uploads/b2d961ca-7d3a-440a-9f82-966a3f6adf57.png" 
+              alt="Salvatore Full Logo" 
+              className="h-10 hidden md:block"
+            />
           </a>
 
-          {/* Progress bar - updated color */}
           <div 
             className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-electric-red to-neon-pink" 
             style={{ width: `${scrollProgress * 100}%` }} 
           />
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:block">
             <ul className="flex space-x-4">
               <NavLink href="#home">Home</NavLink>
@@ -70,14 +75,12 @@ const Navbar = () => {
             </ul>
           </nav>
 
-          {/* Action Button */}
           <div className="hidden md:block">
             <button className="px-8 py-2 rounded-full bg-electric-red text-white font-medium hover:bg-electric-crimson transition-colors duration-300 shadow-lg shadow-electric-red/20">
               Start Project
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button 
             className="md:hidden text-white p-2" 
             onClick={() => setMenuOpen(!menuOpen)}
@@ -88,7 +91,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div className={`
         md:hidden fixed inset-0 bg-space-dark/95 backdrop-blur-md z-50 transition-all duration-500 
         ${menuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'}

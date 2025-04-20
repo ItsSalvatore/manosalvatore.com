@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, Check } from 'lucide-react';
 
@@ -47,12 +46,18 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between">
-          <a href="/" className="text-xl font-display font-semibold text-gradient">
-            Neon<span className="font-light">Echo</span>
+          <a href="/" className="flex items-center space-x-2">
+            <span className="text-2xl font-display font-bold">
+              <span className="text-electric-red">Salvatore</span>
+              <span className="font-light text-white">Dev</span>
+            </span>
           </a>
 
-          {/* Progress bar */}
-          <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-electric-purple to-neon-cyan" style={{ width: `${scrollProgress * 100}%` }} />
+          {/* Progress bar - updated color */}
+          <div 
+            className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-electric-red to-neon-pink" 
+            style={{ width: `${scrollProgress * 100}%` }} 
+          />
 
           {/* Desktop Navigation */}
           <nav className="hidden md:block">

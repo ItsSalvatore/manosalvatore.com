@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -22,56 +21,56 @@ interface PricingPlan {
 
 const plans: PricingPlan[] = [
   {
-    name: 'Starter',
+    name: 'Basic Package',
     price: {
-      monthly: 49,
-      yearly: 39,
+      monthly: 499,
+      yearly: 399,
     },
-    description: 'Perfect for small projects and individuals',
+    description: 'Essential web development package for small projects',
     features: [
-      { name: 'Up to 5 projects', included: true },
-      { name: 'Basic analytics', included: true },
-      { name: 'Email support', included: true },
-      { name: 'Custom domains', included: false },
-      { name: 'Advanced integrations', included: false },
-      { name: 'Priority support', included: false },
+      { name: 'Single Page Website', included: true },
+      { name: 'Responsive Design', included: true },
+      { name: 'Basic SEO Setup', included: true },
+      { name: 'Contact Form', included: true },
+      { name: '3D Elements', included: false },
+      { name: 'Custom Animations', included: false },
     ],
-    buttonText: 'Get Started',
+    buttonText: 'Choose Package',
   },
   {
-    name: 'Pro',
+    name: 'Premium Package',
     price: {
-      monthly: 99,
-      yearly: 79,
+      monthly: 999,
+      yearly: 799,
     },
-    description: 'Ideal for growing businesses and teams',
+    description: 'Advanced package with custom features and animations',
     features: [
-      { name: 'Unlimited projects', included: true },
-      { name: 'Advanced analytics', included: true },
-      { name: 'Email & chat support', included: true },
-      { name: 'Custom domains', included: true },
-      { name: 'Advanced integrations', included: true },
-      { name: 'Priority support', included: false },
+      { name: 'Multi-page Website', included: true },
+      { name: 'Advanced Responsive Design', included: true },
+      { name: 'Complete SEO Setup', included: true },
+      { name: 'Contact Form & Chat', included: true },
+      { name: '3D Elements', included: true },
+      { name: 'Custom Animations', included: true },
     ],
     highlighted: true,
-    buttonText: 'Go Pro',
+    buttonText: 'Select Package',
   },
   {
-    name: 'Business',
+    name: 'Enterprise Package',
     price: {
-      monthly: 199,
-      yearly: 159,
+      monthly: 1999,
+      yearly: 1599,
     },
-    description: 'For large organizations with advanced needs',
+    description: 'Full-scale web solutions for large organizations',
     features: [
-      { name: 'Unlimited projects', included: true },
-      { name: 'Advanced analytics', included: true },
-      { name: 'Email, chat & phone support', included: true },
-      { name: 'Custom domains', included: true },
-      { name: 'Advanced integrations', included: true },
-      { name: 'Priority support', included: true },
+      { name: 'Custom Web Application', included: true },
+      { name: 'Advanced Interactions', included: true },
+      { name: 'Full SEO & Analytics', included: true },
+      { name: 'Integration Services', included: true },
+      { name: 'Custom 3D Elements', included: true },
+      { name: 'Premium Support', included: true },
     ],
-    buttonText: 'Contact Sales',
+    buttonText: 'Contact Us',
   },
 ];
 
@@ -97,7 +96,7 @@ const Pricing = () => {
               className={cn(
                 "px-6 py-2 rounded-full text-sm font-medium transition-colors duration-200",
                 billing === 'monthly' 
-                  ? "bg-electric-purple text-white shadow-lg shadow-electric-purple/20" 
+                  ? "bg-electric-red text-white shadow-lg shadow-electric-red/20" 
                   : "text-white/70 hover:text-white"
               )}
             >
@@ -108,7 +107,7 @@ const Pricing = () => {
               className={cn(
                 "px-6 py-2 rounded-full text-sm font-medium transition-colors duration-200 relative",
                 billing === 'yearly' 
-                  ? "bg-electric-purple text-white shadow-lg shadow-electric-purple/20" 
+                  ? "bg-electric-red text-white shadow-lg shadow-electric-red/20" 
                   : "text-white/70 hover:text-white"
               )}
             >
@@ -127,14 +126,14 @@ const Pricing = () => {
               className={cn(
                 "relative rounded-2xl transition-all duration-500 group",
                 plan.highlighted 
-                  ? "glass-panel border-electric-purple/30" 
+                  ? "glass-panel border-electric-red/30" 
                   : "bg-white/5 border border-white/10"
               )}
             >
               {/* Floating elements for highlighted plan */}
               {plan.highlighted && (
                 <>
-                  <div className="absolute -top-3 -left-3 w-6 h-6 rounded-full bg-electric-purple animate-float" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="absolute -top-3 -left-3 w-6 h-6 rounded-full bg-electric-red animate-float" style={{ animationDelay: '0.2s' }}></div>
                   <div className="absolute -bottom-3 -right-3 w-4 h-4 rounded-full bg-neon-cyan animate-float" style={{ animationDelay: '0.6s' }}></div>
                   <div className="absolute top-1/4 -right-2 w-3 h-3 rounded-full bg-neon-teal animate-float" style={{ animationDelay: '0.4s' }}></div>
                 </>
@@ -142,7 +141,7 @@ const Pricing = () => {
               
               {/* Popular badge */}
               {plan.highlighted && (
-                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-electric-purple text-white text-sm font-medium px-4 py-1 rounded-full">
+                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-electric-red text-white text-sm font-medium px-4 py-1 rounded-full">
                   Most Popular
                 </div>
               )}
@@ -174,7 +173,7 @@ const Pricing = () => {
                       <span className={cn(
                         "rounded-full p-0.5 mt-0.5 mr-3",
                         feature.included 
-                          ? "bg-electric-purple text-white" 
+                          ? "bg-electric-red text-white" 
                           : "bg-white/10 text-white/40"
                       )}>
                         <Check className="w-4 h-4" />
@@ -190,7 +189,7 @@ const Pricing = () => {
                   className={cn(
                     "w-full py-3 rounded-xl font-medium transition-all duration-300",
                     plan.highlighted 
-                      ? "bg-electric-purple text-white shadow-lg shadow-electric-purple/20 hover:bg-electric-violet" 
+                      ? "bg-electric-red text-white shadow-lg shadow-electric-red/20 hover:bg-electric-violet" 
                       : "bg-white/10 text-white hover:bg-white/20"
                   )}
                 >
@@ -205,7 +204,7 @@ const Pricing = () => {
           <p className="text-white/60 mb-4">Need a custom plan for your enterprise?</p>
           <a 
             href="#contact" 
-            className="inline-flex items-center text-electric-purple hover:text-neon-cyan transition-colors duration-300"
+            className="inline-flex items-center text-electric-red hover:text-neon-cyan transition-colors duration-300"
           >
             Contact our sales team
             <svg className="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -217,7 +216,7 @@ const Pricing = () => {
       </div>
       
       {/* Background Gradient */}
-      <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-electric-purple/10 rounded-full filter blur-[100px] -z-10"></div>
+      <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-electric-red/10 rounded-full filter blur-[100px] -z-10"></div>
       <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-neon-cyan/10 rounded-full filter blur-[100px] -z-10"></div>
     </section>
   );

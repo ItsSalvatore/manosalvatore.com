@@ -1,5 +1,4 @@
-
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 interface Project {
@@ -66,6 +65,26 @@ const Portfolio = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    let autoScrollInterval: NodeJS.Timeout;
+
+    if (!isPaused) {
+      autoScrollInterval = setInterval(() => {
+        if (carouselRef.current) {
+          const nextIndex = (activeIndex + 1) % projects.length;
+          navigateToProject(nextIndex);
+        }
+      }, 5000); // Auto scroll every 5 seconds
+    }
+
+    return () => {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+      }
+    };
+  }, [activeIndex, isPaused]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
@@ -117,8 +136,16 @@ const Portfolio = () => {
     }
   };
 
+  const handleMouseEnter = () => setIsPaused(true);
+  const handleMouseLeave = () => setIsPaused(false);
+
   return (
-    <section id="portfolio" className="py-24 relative noise-filter overflow-hidden">
+    <section 
+      id="portfolio" 
+      className="py-24 relative noise-filter overflow-hidden"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">

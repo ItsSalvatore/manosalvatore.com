@@ -149,14 +149,14 @@ const Portfolio = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            Our <span className="text-gradient">Portfolio</span>
+            Ons <span className="text-gradient">Portfolio</span>
           </h2>
           <p className="text-lg text-white/70 max-w-3xl mx-auto">
-            Explore our latest projects showcasing the cutting-edge web experiences we create
+            Ontdek onze laatste projecten die de nieuwste web ervaringen laten zien
           </p>
         </div>
         
-        <div className="relative">
+        <div className="max-w-6xl mx-auto relative">
           <div 
             ref={carouselRef}
             className={cn(

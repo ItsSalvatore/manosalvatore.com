@@ -6,10 +6,10 @@ const NavLink = ({ href, children }: { href: string, children: React.ReactNode }
     <li className="relative group">
       <a 
         href={href} 
-        className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors duration-200"
+        className="px-6 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors duration-200"
       >
         {children}
-        <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-electric-purple group-hover:w-[calc(100%-32px)] -translate-x-1/2 transition-all duration-300" />
+        <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-electric-purple group-hover:w-[calc(100%-48px)] -translate-x-1/2 transition-all duration-300" />
       </a>
     </li>
   );
@@ -40,13 +40,13 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? 'py-3 glass-panel' 
-          : 'py-6 bg-transparent'
+          ? 'py-4 glass-panel' 
+          : 'py-8 bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between">
-          <a href="/" className="flex items-center space-x-2">
+          <a href="/" className="flex items-center space-x-4">
             <span className="text-2xl font-display font-bold">
               <span className="text-electric-red">Salvatore</span>
               <span className="font-light text-white">Dev</span>
@@ -61,19 +61,19 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
-            <ul className="flex space-x-2">
+            <ul className="flex space-x-4">
               <NavLink href="#home">Home</NavLink>
-              <NavLink href="#about">About</NavLink>
-              <NavLink href="#features">Features</NavLink>
-              <NavLink href="#pricing">Pricing</NavLink>
               <NavLink href="#portfolio">Portfolio</NavLink>
+              <NavLink href="#diensten">Diensten</NavLink>
+              <NavLink href="#pakketten">Pakketten</NavLink>
+              <NavLink href="#contact">Contact</NavLink>
             </ul>
           </nav>
 
           {/* Action Button */}
           <div className="hidden md:block">
-            <button className="px-6 py-2 rounded-full bg-electric-purple text-white font-medium hover:bg-electric-violet transition-colors duration-300 shadow-lg shadow-electric-purple/20">
-              Get Started
+            <button className="px-8 py-2 rounded-full bg-electric-red text-white font-medium hover:bg-electric-crimson transition-colors duration-300 shadow-lg shadow-electric-red/20">
+              Start Project
             </button>
           </div>
 
@@ -111,7 +111,7 @@ const Navbar = () => {
 
           <nav className="flex-1">
             <ul className="space-y-6 py-8">
-              {['Home', 'About', 'Features', 'Pricing', 'Portfolio'].map((item, i) => (
+              {['Home', 'Portfolio', 'Diensten', 'Pakketten', 'Contact'].map((item, i) => (
                 <li key={item} style={{ animationDelay: `${i * 0.1}s` }} className="animate-text-reveal">
                   <a 
                     href={`#${item.toLowerCase()}`} 
@@ -127,8 +127,8 @@ const Navbar = () => {
           </nav>
 
           <div className="mt-auto pb-8">
-            <button className="w-full py-3 rounded-full bg-electric-purple text-white font-medium hover:bg-electric-violet transition-colors duration-300 shadow-lg shadow-electric-purple/20">
-              Get Started
+            <button className="w-full py-3 rounded-full bg-electric-red text-white font-medium hover:bg-electric-crimson transition-colors duration-300 shadow-lg shadow-electric-red/20">
+              Start Project
             </button>
           </div>
         </div>

@@ -1,0 +1,135 @@
+
+import React, { useState, useEffect } from 'react';
+import { Menu, Check } from 'lucide-react';
+
+const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
+  return (
+    <li className="relative group">
+      <a 
+        href={href} 
+        className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors duration-200"
+      >
+        {children}
+        <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-electric-purple group-hover:w-[calc(100%-32px)] -translate-x-1/2 transition-all duration-300" />
+      </a>
+    </li>
+  );
+};
+
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const scrollThreshold = 10;
+      setScrolled(scrollY > scrollThreshold);
+      
+      // Calculate scroll progress
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollY / docHeight;
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled 
+          ? 'py-3 glass-panel' 
+          : 'py-6 bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="flex items-center justify-between">
+          <a href="/" className="text-xl font-display font-semibold text-gradient">
+            Neon<span className="font-light">Echo</span>
+          </a>
+
+          {/* Progress bar */}
+          <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-electric-purple to-neon-cyan" style={{ width: `${scrollProgress * 100}%` }} />
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:block">
+            <ul className="flex space-x-2">
+              <NavLink href="#home">Home</NavLink>
+              <NavLink href="#about">About</NavLink>
+              <NavLink href="#features">Features</NavLink>
+              <NavLink href="#pricing">Pricing</NavLink>
+              <NavLink href="#portfolio">Portfolio</NavLink>
+            </ul>
+          </nav>
+
+          {/* Action Button */}
+          <div className="hidden md:block">
+            <button className="px-6 py-2 rounded-full bg-electric-purple text-white font-medium hover:bg-electric-violet transition-colors duration-300 shadow-lg shadow-electric-purple/20">
+              Get Started
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden text-white p-2" 
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`
+        md:hidden fixed inset-0 bg-space-dark/95 backdrop-blur-md z-50 transition-all duration-500 
+        ${menuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'}
+      `}>
+        <div className="container mx-auto px-4 py-8 h-full flex flex-col">
+          <div className="flex justify-between items-center mb-8">
+            <a href="/" className="text-xl font-display font-semibold text-gradient">
+              Neon<span className="font-light">Echo</span>
+            </a>
+            <button 
+              className="text-white p-2" 
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <nav className="flex-1">
+            <ul className="space-y-6 py-8">
+              {['Home', 'About', 'Features', 'Pricing', 'Portfolio'].map((item, i) => (
+                <li key={item} style={{ animationDelay: `${i * 0.1}s` }} className="animate-text-reveal">
+                  <a 
+                    href={`#${item.toLowerCase()}`} 
+                    className="text-3xl font-display text-white/90 hover:text-gradient transition-all duration-300 flex items-center space-x-4"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <span className="w-8 h-[1px] bg-electric-purple/50"></span>
+                    <span>{item}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="mt-auto pb-8">
+            <button className="w-full py-3 rounded-full bg-electric-purple text-white font-medium hover:bg-electric-violet transition-colors duration-300 shadow-lg shadow-electric-purple/20">
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;

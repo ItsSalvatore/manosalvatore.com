@@ -37,7 +37,7 @@ const CustomCursor = () => {
   return (
     <>
       <div 
-        className="custom-cursor"
+        className="fixed w-6 h-6 rounded-full bg-electric-purple/40 pointer-events-none z-50 mix-blend-screen transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out"
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,

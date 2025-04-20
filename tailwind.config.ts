@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -58,7 +59,8 @@ export default {
         },
         electric: {
           red: '#ea384c',
-          crimson: '#dc2626'
+          crimson: '#dc2626',
+          purple: '#8B5CF6'  // Adding the missing electric-purple color
         },
         neon: {
           pink: '#ff6b6b',

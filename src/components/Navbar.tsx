@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, Check } from 'lucide-react';
+import { Menu } from 'lucide-react';
 
 const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
   return (
@@ -46,17 +46,11 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between">
-          <a href="/" className="flex items-center space-x-4">
+          <a href="/" className="flex items-center">
             <img 
-              src="/lovable-uploads/cd5c5f8f-0e54-4467-815e-d196aaa79c37.png" 
+              src="/lovable-uploads/cf2b9c3d-bcfe-433f-938a-2de8f5fac56a.png" 
               alt="Salvatore Logo" 
-              className="h-8 w-8 mr-2"
-            />
-            
-            <img 
-              src="/lovable-uploads/b2d961ca-7d3a-440a-9f82-966a3f6adf57.png" 
-              alt="Salvatore Full Logo" 
-              className="h-10 hidden md:block"
+              className="h-8 md:h-10"
             />
           </a>
 

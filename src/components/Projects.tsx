@@ -1,0 +1,102 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+
+interface Project {
+  title: string;
+  description: string;
+  link: string;
+  category: 'Business Websites' | 'Web Applications (Apps)';
+}
+
+const projects: Project[] = [
+  {
+    title: 'SV SIT',
+    description: 'WordPress platform voor de studievereniging van Informatica & Technische Informatica met geïntegreerde evenementenkalender en ledenadministratie.',
+    link: 'https://svsit.nl',
+    category: 'Business Websites'
+  },
+  {
+    title: 'SV Fermi',
+    description: 'WordPress website voor de studievereniging van Technische Natuurkunde, voorzien van 3D-geïntegreerde elementen en evenementenbeheer.',
+    link: 'https://svfermi.nl',
+    category: 'Business Websites'
+  },
+  {
+    title: 'Scout Platform',
+    description: 'Modern talent matching platform gebouwd met Next.js en React, gericht op het verbinden van talent met de juiste kansen.',
+    link: 'https://scout-git-main-itssalvatores-projects.vercel.app',
+    category: 'Web Applications (Apps)'
+  },
+  {
+    title: 'Scout Web App',
+    description: 'Geavanceerde web applicatie in ontwikkeling met uitgebreide matching functionaliteit en real-time updates.',
+    link: '#',
+    category: 'Web Applications (Apps)'
+  }
+];
+
+const Projects = () => {
+  return (
+    <section id="projects" className="py-20 bg-gradient-to-b from-space-dark to-[#0a192f]">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-primary mb-4">Opleveringen</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Ontdek onze meest recente projecten en zie hoe wij innovatieve oplossingen ontwikkelen voor verschillende doelgroepen.
+          </p>
+        </motion.div>
+
+        <div className="space-y-20">
+          {(['Business Websites', 'Web Applications (Apps)'] as const).map((category) => (
+            <div key={category}>
+              <motion.h3
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-2xl font-bold text-white mb-8"
+              >
+                {category}
+              </motion.h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {projects
+                  .filter((project) => project.category === category)
+                  .map((project, index) => (
+                    <motion.a
+                      key={project.title}
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      className="group block p-6 bg-space-dark/50 rounded-lg backdrop-blur-sm border border-primary/10 hover:border-primary/30 transition-all"
+                    >
+                      <h4 className="text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h4>
+                      <p className="text-gray-400 mb-4">
+                        {project.description}
+                      </p>
+                      <div className="flex items-center text-primary group-hover:translate-x-1 transition-transform">
+                        <span className="mr-2">Bekijk Project</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </motion.a>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Projects; 

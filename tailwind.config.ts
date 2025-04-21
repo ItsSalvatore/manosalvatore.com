@@ -1,7 +1,6 @@
-
 import type { Config } from "tailwindcss";
 
-export default {
+const config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -26,9 +25,11 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
+          DEFAULT: '#d22128',
+          hover: '#b01b21',
         },
+        'space-dark': '#0a0a0a',
+        'neon-blue': '#d22128',
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))'
@@ -163,3 +164,5 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
+export default config;

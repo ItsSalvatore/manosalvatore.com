@@ -1,15 +1,16 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Pricing from '@/components/Pricing';
-import Portfolio from '@/components/Portfolio';
+import Experience from '@/components/Experience';
+import Projects from '@/components/Projects';
+import Contact from '@/components/Contact';
 import CustomCursor from '@/components/CustomCursor';
+import ProjectCarousel from '@/components/ProjectCarousel';
 
 const Index = () => {
   useEffect(() => {
     // Update page title
-    document.title = 'NeonEcho - Ultra Modern Web Experiences';
+    document.title = 'Salvatore - Modern Web Development';
   }, []);
 
   return (
@@ -17,8 +18,10 @@ const Index = () => {
       <CustomCursor />
       <Navbar />
       <Hero />
-      <Portfolio />
-      <Pricing />
+      <ProjectCarousel />
+      <Experience />
+      <Projects />
+      <Contact />
     </div>
   );
 };

@@ -39,8 +39,8 @@ const Contact = () => {
     {
       icon: <Mail className="w-5 h-5" />,
       label: 'E-mail',
-      value: 'manosalvatore.s@gmail.com',
-      href: 'mailto:manosalvatore.s@gmail.com'
+      value: 'info@manosalvatore.com',
+      href: 'mailto:info@manosalvatore.com'
     }
   ];
 
@@ -129,12 +129,12 @@ const Contact = () => {
               transition={{ duration: 0.6 }}
             >
               <form 
-                action="https://formsubmit.co/manosalvatore.s@gmail.com" 
+                action="https://formsubmit.co/info@manosalvatore.com" 
                 method="POST"
                 className="space-y-6"
               >
                 {/* FormSubmit Configuration */}
-                <input type="hidden" name="_next" value="https://neon-echo-waves.vercel.app/#contact" />
+                <input type="hidden" name="_next" value="https://manosalvatore.com/#contact" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_autoresponse" value="Bedankt voor je bericht! Ik neem zo snel mogelijk contact met je op." />
 
@@ -205,8 +205,8 @@ const Contact = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:manosalvatore.s@gmail.com" className="hover:text-primary">
-                    manosalvatore.s@gmail.com
+                  <a href="mailto:info@manosalvatore.com" className="hover:text-primary">
+                    info@manosalvatore.com
                   </a>
                 </li>
               </ul>

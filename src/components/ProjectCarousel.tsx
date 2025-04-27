@@ -2,9 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
+interface Project {
+  title: string;
+  image: string;
+  description: string;
+  link: string;
+  tech: string[];
+}
+
 const projects = [
   {
-    id: 1,
+    title: 'Scout',
+    image: '/images/Scout.png',
+    description: 'Modern talent matching platform gebouwd met de nieuwste web technologieën voor optimale gebruikerservaring en prestaties.',
+    link: 'https://scout-git-main-itssalvatores-projects.vercel.app',
+    tech: ['Next.js', 'React', 'Shadcn/UI', 'Tailwind CSS']
+  },
+  {
     title: 'SV SIT',
     image: '/images/SIT.png',
     description: 'Een moderne WordPress website voor de studievereniging met geïntegreerde evenementenkalender, ledenadministratie en dynamische content management.',
@@ -12,21 +26,12 @@ const projects = [
     tech: ['WordPress', 'Elementor Pro', 'Event Calendar', 'Custom PHP']
   },
   {
-    id: 2,
     title: 'SV Fermi',
     image: '/images/Fermi.png',
     description: 'WordPress platform met 3D-geïntegreerde elementen, evenementenbeheer en een uniek ontwerp voor de studievereniging van Technische Natuurkunde.',
     link: 'https://svfermi.nl',
     tech: ['WordPress', 'Elementor Pro', '3D Integration', 'Custom PHP']
-  },
-  {
-    id: 3,
-    title: 'Scout',
-    image: '/images/Scout.png',
-    description: 'Modern talent matching platform gebouwd met de nieuwste web technologieën voor optimale gebruikerservaring en prestaties.',
-    link: 'https://scout-git-main-itssalvatores-projects.vercel.app',
-    tech: ['Next.js', 'React', 'Shadcn/UI', 'Tailwind CSS']
-  },
+  }
 ];
 
 const ProjectCarousel = () => {
@@ -35,7 +40,7 @@ const ProjectCarousel = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      nextSlide();
+      paginate(1);
     }, 5000);
 
     return () => clearInterval(timer);
@@ -73,7 +78,7 @@ const ProjectCarousel = () => {
   const prevSlide = () => paginate(-1);
 
   return (
-    <section className="py-20 bg-space-dark">
+    <section className="py-20 bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -82,10 +87,10 @@ const ProjectCarousel = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
             Projecten
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Bekijk mijn portfolio van projecten en ontdek hoe ik innovatieve oplossingen ontwikkel.
           </p>
         </motion.div>
@@ -108,7 +113,7 @@ const ProjectCarousel = () => {
               <div className="grid md:grid-cols-2 gap-8 h-full">
                 {/* Image Section */}
                 <div className="relative h-[250px] md:h-full flex items-center">
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden border border-primary/20 bg-space-light/5 backdrop-blur-sm">
+                  <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border/30 bg-background/60 backdrop-blur-sm">
                     <div className="absolute inset-0 flex items-center justify-center">
                       <motion.img
                         src={projects[currentIndex].image}
@@ -119,7 +124,7 @@ const ProjectCarousel = () => {
                         transition={{ duration: 0.3 }}
                       />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-space-dark/50 via-transparent to-space-dark/50" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-transparent to-background/50" />
                   </div>
                 </div>
 
@@ -131,10 +136,10 @@ const ProjectCarousel = () => {
                     transition={{ duration: 0.3 }}
                     className="space-y-6"
                   >
-                    <h2 className="text-3xl md:text-4xl font-bold text-white">
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                       {projects[currentIndex].title}
                     </h2>
-                    <p className="text-lg text-gray-300">
+                    <p className="text-lg text-muted-foreground">
                       {projects[currentIndex].description}
                     </p>
                     
@@ -146,7 +151,7 @@ const ProjectCarousel = () => {
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ duration: 0.2 }}
-                          className="inline-flex px-3 py-1.5 rounded-full bg-red-500/10 text-red-500 text-sm font-medium border border-red-500/20"
+                          className="inline-flex px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20"
                         >
                           {tech}
                         </motion.span>
@@ -161,7 +166,7 @@ const ProjectCarousel = () => {
                       href={projects[currentIndex].link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-space-dark font-medium hover:bg-primary/90 transition-colors"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
                     >
                       Bezoek Project
                       <ExternalLink size={16} />
@@ -174,13 +179,13 @@ const ProjectCarousel = () => {
 
           {/* Navigation Buttons */}
           <button
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-space-dark border border-primary/20 text-primary hover:bg-space-light/10 transition-colors"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-background/60 backdrop-blur-sm border border-border/30 text-foreground hover:bg-background/80 transition-colors"
             onClick={prevSlide}
           >
             <ChevronLeft size={20} />
           </button>
           <button
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-space-dark border border-primary/20 text-primary hover:bg-space-light/10 transition-colors"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-background/60 backdrop-blur-sm border border-border/30 text-foreground hover:bg-background/80 transition-colors"
             onClick={nextSlide}
           >
             <ChevronRight size={20} />
@@ -196,7 +201,7 @@ const ProjectCarousel = () => {
                   setCurrentIndex(index);
                 }}
                 className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-primary' : 'bg-primary/20'
+                  index === currentIndex ? 'bg-primary' : 'bg-border hover:bg-primary/50'
                 }`}
               />
             ))}

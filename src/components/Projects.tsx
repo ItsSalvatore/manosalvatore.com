@@ -38,7 +38,7 @@ const projects: Project[] = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-space-dark to-[#0a192f]">
+    <section id="projects" className="py-20 bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,7 +47,7 @@ const Projects = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-primary mb-4">Opleveringen</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Ontdek onze meest recente projecten en zie hoe wij innovatieve oplossingen ontwikkelen voor verschillende doelgroepen.
           </p>
         </motion.div>
@@ -59,7 +59,7 @@ const Projects = () => {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-2xl font-bold text-white mb-8"
+                className="text-2xl font-bold text-foreground mb-8"
               >
                 {category}
               </motion.h3>
@@ -76,12 +76,12 @@ const Projects = () => {
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
-                      className="group block p-6 bg-space-dark/50 rounded-lg backdrop-blur-sm border border-primary/10 hover:border-primary/30 transition-all"
+                      className="group block p-6 bg-background/60 backdrop-blur-md rounded-xl border border-border/30 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300"
                     >
-                      <h4 className="text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">
+                      <h4 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                         {project.title}
                       </h4>
-                      <p className="text-gray-400 mb-4">
+                      <p className="text-muted-foreground mb-4">
                         {project.description}
                       </p>
                       <div className="flex items-center text-primary group-hover:translate-x-1 transition-transform">

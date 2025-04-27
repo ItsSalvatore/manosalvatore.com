@@ -1,14 +1,17 @@
-
 import React, { useState, useEffect } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const CustomCursor = () => {
+  const isMobile = useIsMobile();
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
 
   useEffect(() => {
+    if (isMobile) return;
+
     const updatePosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      setPosition({ x: e.pageX, y: e.pageY });
       if (!isVisible) setIsVisible(true);
     };
 
@@ -30,9 +33,9 @@ const CustomCursor = () => {
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible]);
+  }, [isVisible, isMobile]);
 
-  if (!isVisible) return null;
+  if (isMobile || !isVisible) return null;
 
   return (
     <>

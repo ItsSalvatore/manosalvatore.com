@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center relative overflow-hidden bg-space-dark">
+    <section className="min-h-screen flex items-center relative overflow-hidden bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto px-4 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -17,7 +17,7 @@ const Hero = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-block py-2 px-4 bg-primary/10 text-primary rounded-full text-sm font-medium"
+              className="inline-block py-2 px-4 bg-primary/10 backdrop-blur-sm text-primary rounded-full text-sm font-medium"
             >
               Dit is Salvatore
             </motion.span>
@@ -26,7 +26,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-5xl md:text-7xl font-bold leading-tight"
+              className="text-5xl md:text-7xl font-bold leading-tight text-foreground"
             >
               De Toekomst van{' '}
               <span className="text-primary">Digitaal Design</span>
@@ -36,7 +36,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-gray-400 text-lg max-w-xl"
+              className="text-muted-foreground text-lg max-w-xl"
             >
               Revolutionaire Web Ervaringen
             </motion.p>
@@ -49,13 +49,13 @@ const Hero = () => {
             >
               <a
                 href="#contact"
-                className="inline-flex items-center px-6 py-3 rounded-lg bg-primary hover:bg-primary/90 text-white font-medium transition-colors"
+                className="inline-flex items-center px-6 py-3 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-all duration-300 hover:shadow-lg"
               >
                 Contact
               </a>
               <a
                 href="#projects"
-                className="inline-flex items-center px-6 py-3 rounded-lg border border-primary/20 hover:border-primary/40 text-white font-medium group"
+                className="inline-flex items-center px-6 py-3 rounded-lg border border-border/30 hover:border-primary/40 text-foreground font-medium group backdrop-blur-sm bg-background/60 hover:shadow-lg transition-all duration-300"
               >
                 Bekijk Mijn Werk
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -69,9 +69,9 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative lg:block hidden"
           >
-            <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-space-dark border border-primary/20">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
-              <div className="absolute top-0 left-0 right-0 h-10 flex items-center px-4 bg-space-dark/90 border-b border-primary/20">
+            <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-background/60 backdrop-blur-md border border-border/30 shadow-lg">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-10 flex items-center px-4 bg-background/80 backdrop-blur-sm border-b border-border/30">
                 <div className="flex space-x-2">
                   <div className="w-3 h-3 rounded-full bg-red-500" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500" />

@@ -76,7 +76,7 @@ const Contact = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-primary mb-4">Contact</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto">
               Heb je een project in gedachten? Neem contact met mij op en laat mij jouw ideeën tot leven brengen.
             </p>
           </motion.div>
@@ -93,11 +93,11 @@ const Contact = () => {
                   <a
                     key={index}
                     href={item.href}
-                    className="flex items-center space-x-4 text-gray-400 hover:text-primary transition-colors p-4 rounded-lg bg-space-dark/50 border border-primary/10 hover:border-primary/30"
+                    className="flex items-center space-x-4 text-muted-foreground hover:text-primary transition-colors p-4 rounded-lg bg-background/60 backdrop-blur-md border border-border/30 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     <div className="text-primary">{item.icon}</div>
                     <div>
-                      <p className="font-medium text-white">{item.label}</p>
+                      <p className="font-medium text-foreground">{item.label}</p>
                       <p>{item.value}</p>
                     </div>
                   </a>
@@ -105,7 +105,7 @@ const Contact = () => {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-white mb-4">Volg mij</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">Volg mij</h3>
                 <div className="flex space-x-4">
                   {socialLinks.map((social, index) => (
                     <a
@@ -113,7 +113,7 @@ const Contact = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 rounded-full bg-space-dark/50 border border-primary/10 hover:border-primary/30 text-primary hover:text-white hover:bg-primary transition-colors"
+                      className="p-3 rounded-full bg-background/60 backdrop-blur-md border border-border/30 hover:border-primary/30 text-primary hover:text-white hover:bg-primary transition-all duration-300 shadow-lg hover:shadow-xl"
                       aria-label={social.label}
                     >
                       {social.icon}
@@ -127,6 +127,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
+              className="bg-background/60 backdrop-blur-md p-8 rounded-xl border border-border/30 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <form 
                 action="https://formsubmit.co/info@manosalvatore.com" 
@@ -143,7 +144,7 @@ const Contact = () => {
                     name="name"
                     placeholder="Je naam"
                     required
-                    className="bg-space-dark/50 border-primary/20 focus:border-primary text-white placeholder:text-gray-500"
+                    className="bg-background/60 backdrop-blur-md border-border/30 focus:border-primary text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
 
@@ -153,7 +154,7 @@ const Contact = () => {
                     type="email"
                     placeholder="Je e-mailadres"
                     required
-                    className="bg-space-dark/50 border-primary/20 focus:border-primary text-white placeholder:text-gray-500"
+                    className="bg-background/60 backdrop-blur-md border-border/30 focus:border-primary text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
 
@@ -162,7 +163,7 @@ const Contact = () => {
                     name="subject"
                     placeholder="Onderwerp"
                     required
-                    className="bg-space-dark/50 border-primary/20 focus:border-primary text-white placeholder:text-gray-500"
+                    className="bg-background/60 backdrop-blur-md border-border/30 focus:border-primary text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
 
@@ -171,13 +172,13 @@ const Contact = () => {
                     name="message"
                     placeholder="Je bericht"
                     required
-                    className="bg-space-dark/50 border-primary/20 focus:border-primary text-white placeholder:text-gray-500 min-h-[150px]"
+                    className="bg-background/60 backdrop-blur-md border-border/30 focus:border-primary text-foreground placeholder:text-muted-foreground min-h-[150px]"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   Verstuur Bericht
                 </Button>
@@ -187,32 +188,32 @@ const Contact = () => {
         </div>
       </section>
 
-      <footer className="py-12 bg-space-dark border-t border-primary/10">
+      <footer className="py-12 bg-background/80 backdrop-blur-md border-t border-border/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Salvatore</h3>
-              <p className="text-gray-400">
+            <div className="bg-background/60 backdrop-blur-md p-6 rounded-xl border border-border/30 shadow-lg">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Salvatore</h3>
+              <p className="text-muted-foreground">
                 Modern web development voor ambitieuze projecten.
               </p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
-              <ul className="space-y-2 text-gray-400">
+            <div className="bg-background/60 backdrop-blur-md p-6 rounded-xl border border-border/30 shadow-lg">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Contact</h3>
+              <ul className="space-y-2 text-muted-foreground">
                 <li>
-                  <a href="tel:+31648332984" className="hover:text-primary">
+                  <a href="tel:+31648332984" className="hover:text-primary transition-colors">
                     +31 6 48332984
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:info@manosalvatore.com" className="hover:text-primary">
+                  <a href="mailto:info@manosalvatore.com" className="hover:text-primary transition-colors">
                     info@manosalvatore.com
                   </a>
                 </li>
               </ul>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Volg mij</h3>
+            <div className="bg-background/60 backdrop-blur-md p-6 rounded-xl border border-border/30 shadow-lg">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Volg mij</h3>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <a
@@ -220,7 +221,7 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-primary"
+                    className="text-muted-foreground hover:text-primary transition-colors"
                     aria-label={social.label}
                   >
                     {social.icon}
@@ -228,14 +229,14 @@ const Contact = () => {
                 ))}
               </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Locatie</h3>
-              <p className="text-gray-400">
+            <div className="bg-background/60 backdrop-blur-md p-6 rounded-xl border border-border/30 shadow-lg">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Locatie</h3>
+              <p className="text-muted-foreground">
                 Amsterdam, Nederland
               </p>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-primary/10 text-center text-gray-400">
+          <div className="mt-12 pt-8 border-t border-border/30 text-center text-muted-foreground">
             <p>© {new Date().getFullYear()} Salvatore. Alle rechten voorbehouden.</p>
           </div>
         </div>

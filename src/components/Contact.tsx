@@ -66,7 +66,7 @@ const Contact = () => {
     <>
       <section 
         id="contact"
-        className="py-24 relative noise-filter"
+        className="relative mt-32 md:mt-40 pb-20"
       >
         <div className="container mx-auto px-4">
           <motion.div
@@ -93,7 +93,7 @@ const Contact = () => {
                   <a
                     key={index}
                     href={item.href}
-                    className="flex items-center space-x-4 text-muted-foreground hover:text-primary transition-colors p-4 rounded-lg bg-background/60 backdrop-blur-md border border-border/30 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="hover-card flex items-center space-x-4 text-muted-foreground hover:text-primary transition-colors p-4 rounded-lg bg-background/60 backdrop-blur-md border border-border/30"
                   >
                     <div className="text-primary">{item.icon}</div>
                     <div>
@@ -113,7 +113,7 @@ const Contact = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 rounded-full bg-background/60 backdrop-blur-md border border-border/30 hover:border-primary/30 text-primary hover:text-white hover:bg-primary transition-all duration-300 shadow-lg hover:shadow-xl"
+                      className="animated-button p-3 rounded-full bg-background/60 backdrop-blur-md border border-border/30 text-primary hover:text-white hover:bg-primary"
                       aria-label={social.label}
                     >
                       {social.icon}
@@ -127,7 +127,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-background/60 backdrop-blur-md p-8 rounded-xl border border-border/30 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="hover-card bg-background/60 backdrop-blur-md p-8 rounded-xl border border-border/30"
             >
               <form 
                 action="https://formsubmit.co/info@manosalvatore.com" 
@@ -188,7 +188,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <footer className="py-12 bg-background/80 backdrop-blur-md border-t border-border/30">
+      <footer className="section-container py-12 bg-background/80 backdrop-blur-md border-t border-border/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="bg-background/60 backdrop-blur-md p-6 rounded-xl border border-border/30 shadow-lg">
@@ -237,7 +237,10 @@ const Contact = () => {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-border/30 text-center text-muted-foreground">
-            <p>© {new Date().getFullYear()} Salvatore. Alle rechten voorbehouden.</p>
+            <p className="flex items-center justify-center gap-2">
+              Gemaakt met <span className="heart-icon text-primary">❤</span> door Salvatore
+            </p>
+            <p className="mt-2">© {new Date().getFullYear()} Salvatore. Alle rechten voorbehouden.</p>
           </div>
         </div>
       </footer>

@@ -44,6 +44,16 @@
     --sidebar-accent-foreground: 222 47% 4%;
     --sidebar-border: 214 32% 91%;
     --sidebar-ring: 263 70% 56%;
+
+    /* Enhanced light mode colors for better hierarchy */
+    --section-bg-primary: 210 40% 98%;
+    --section-bg-secondary: 220 30% 96%;
+    --section-border: 214 32% 91%;
+    --hover-highlight: 348 89% 57% / 0.1;
+    
+    /* New animation variables */
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
@@ -113,6 +123,12 @@
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 263 70% 56%;
+
+    /* Enhanced light mode colors for better hierarchy */
+    --section-bg-primary: 210 40% 98%;
+    --section-bg-secondary: 220 30% 96%;
+    --section-border: 214 32% 91%;
+    --hover-highlight: 348 89% 57% / 0.1;
   }
 }
 
@@ -146,6 +162,276 @@
   .custom-cursor {
     @apply fixed w-6 h-6 rounded-full bg-electric-purple/40 pointer-events-none z-50 mix-blend-screen transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out;
   }
+
+  /* Glassmorphic card styling */
+  .light .hover-card {
+    @apply relative transform transition-all duration-500 
+           bg-white/40 backdrop-blur-md
+           border border-white/20
+           shadow-[0_8px_32px_0_rgba(31,38,135,0.1)]
+           hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.2)]
+           overflow-hidden;
+  }
+
+  .light .hover-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 transition-opacity duration-300;
+  }
+
+  .light .hover-card:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Glassy cursor follow effect */
+  .light .cursor-glow {
+    @apply absolute w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none
+           transition-transform duration-100 ease-out -z-10
+           opacity-0 scale-50;
+    transform: translate(-50%, -50%);
+  }
+
+  .light .hover-card:hover .cursor-glow {
+    @apply opacity-100 scale-100;
+  }
+
+  /* Section styling */
+  .light .section-container {
+    @apply relative py-16 px-4 transition-all duration-500;
+    background: linear-gradient(to bottom, 
+                rgba(255,255,255,0.5),
+                rgba(255,255,255,0.3));
+  }
+
+  /* Category headers */
+  .light .category-header {
+    @apply relative pl-4 border-l-4 border-primary/30 
+           bg-white/40 backdrop-blur-sm
+           py-2 px-4 rounded-r-lg
+           shadow-[0_4px_16px_0_rgba(31,38,135,0.1)]
+           transition-all duration-300;
+  }
+
+  .light .category-header:hover {
+    @apply border-primary shadow-[0_4px_16px_0_rgba(31,38,135,0.15)];
+  }
+
+  /* Section dividers with enhanced visibility and animations */
+  .light .section-divider {
+    @apply relative h-[2px] my-8 overflow-hidden;
+    background: linear-gradient(to right,
+      transparent,
+      hsl(var(--primary) / 0.25) 20%,
+      hsl(var(--primary) / 0.35) 50%,
+      hsl(var(--primary) / 0.25) 80%,
+      transparent
+    );
+    animation: float-subtle 3s ease-in-out infinite;
+  }
+
+  .light .section-divider::before {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(to right,
+      transparent,
+      hsl(var(--primary) / 0.5),
+      transparent
+    );
+    width: 50%;
+    animation: line-flow 4s linear infinite;
+  }
+
+  .light .section-divider::after {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-full;
+    background: linear-gradient(to right,
+      transparent,
+      white,
+      transparent
+    );
+    transform: translateX(-100%);
+    animation: sparkle 3s linear infinite;
+  }
+
+  /* Category divider - enhanced but still subtle */
+  .light .category-divider {
+    @apply relative h-[1px] my-12 overflow-hidden;
+    background: linear-gradient(to right,
+      transparent,
+      hsl(var(--primary) / 0.15) 20%,
+      hsl(var(--primary) / 0.2) 50%,
+      hsl(var(--primary) / 0.15) 80%,
+      transparent
+    );
+    animation: float-subtle 4s ease-in-out infinite;
+  }
+
+  /* Button styling */
+  .light .animated-button {
+    @apply relative overflow-hidden transition-all duration-300 
+           backdrop-blur-sm bg-white/40
+           border border-white/20
+           shadow-[0_4px_16px_0_rgba(31,38,135,0.1)]
+           hover:shadow-[0_4px_16px_0_rgba(31,38,135,0.2)]
+           hover:translate-y-[-2px];
+  }
+
+  .light .animated-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5
+           opacity-0 transition-opacity duration-300;
+  }
+
+  .light .animated-button:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Text gradients */
+  .light .text-gradient-animate {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80;
+  }
+
+  /* Hero background effects - Enhanced and more visible */
+  .hero-background {
+    @apply absolute inset-0 overflow-hidden pointer-events-none;
+    background: linear-gradient(to bottom right,
+      hsl(var(--background)),
+      hsl(var(--background) / 0.95)
+    );
+  }
+
+  /* Primary gradient orbs */
+  .hero-background::before {
+    content: '';
+    @apply absolute inset-0;
+    background: 
+      radial-gradient(circle at 20% 20%, hsl(var(--primary) / 0.4) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, hsl(var(--accent) / 0.4) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, hsl(var(--secondary) / 0.2) 0%, transparent 50%);
+    animation: pulse-glow 10s ease-in-out infinite alternate;
+  }
+
+  /* More visible geometric pattern */
+  .geometric-pattern {
+    @apply absolute inset-0;
+    background-image: 
+      linear-gradient(to right, hsl(var(--primary) / 0.15) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
+    transform-origin: center;
+    animation: rotate-pattern 120s linear infinite;
+  }
+
+  /* Distinct floating elements */
+  .floating-elements {
+    @apply absolute inset-0;
+    z-index: 1;
+  }
+
+  .floating-element {
+    @apply absolute rounded-full;
+    filter: blur(40px);
+    animation: float-around 20s linear infinite;
+  }
+
+  .floating-element:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 15%;
+    background: radial-gradient(circle at center, 
+      hsl(var(--primary) / 0.4),
+      transparent 70%
+    );
+    animation-delay: 0s;
+  }
+
+  .floating-element:nth-child(2) {
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    right: 15%;
+    background: radial-gradient(circle at center, 
+      hsl(var(--accent) / 0.4),
+      transparent 70%
+    );
+    animation-delay: -7s;
+    animation-duration: 25s;
+  }
+
+  .floating-element:nth-child(3) {
+    width: 250px;
+    height: 250px;
+    bottom: 15%;
+    left: 35%;
+    background: radial-gradient(circle at center, 
+      hsl(var(--secondary) / 0.4),
+      transparent 70%
+    );
+    animation-delay: -14s;
+    animation-duration: 22s;
+  }
+
+  /* More visible decorative lines */
+  .hero-lines {
+    @apply absolute inset-0 overflow-hidden;
+    opacity: 0.4;
+    z-index: 2;
+  }
+
+  .hero-line {
+    @apply absolute h-[2px] w-full;
+    background: linear-gradient(to right,
+      transparent,
+      hsl(var(--primary) / 0.8) 20%,
+      hsl(var(--primary) / 0.8) 80%,
+      transparent
+    );
+    animation: slide-in-out 8s ease-in-out infinite;
+  }
+
+  .hero-line:nth-child(1) {
+    top: 25%;
+    animation-delay: 0s;
+  }
+
+  .hero-line:nth-child(2) {
+    top: 50%;
+    animation-delay: -2.5s;
+  }
+
+  .hero-line:nth-child(3) {
+    top: 75%;
+    animation-delay: -5s;
+  }
+
+  /* Subtle dot pattern */
+  .hero-dots {
+    @apply absolute inset-0;
+    background-image: 
+      radial-gradient(circle at center, hsl(var(--primary) / 0.2) 1px, transparent 1px);
+    background-size: 24px 24px;
+    animation: fade-in-out 8s ease-in-out infinite alternate;
+    z-index: 1;
+  }
+
+  /* Refined overlay */
+  .hero-overlay {
+    @apply absolute inset-0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      hsl(var(--background) / 0.2) 50%,
+      hsl(var(--background)) 100%
+    );
+    z-index: 3;
+  }
+}
+
+/* Custom animations */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 html {
@@ -156,20 +442,308 @@ html {
   will-change: transform;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Update scrollbar for light mode */
+.light ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-::-webkit-scrollbar-track {
-  @apply bg-background;
+.light ::-webkit-scrollbar-track {
+  @apply bg-white/40 backdrop-blur-sm;
 }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-primary/50 rounded-full;
+.light ::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 rounded-full backdrop-blur-sm hover:bg-primary/50 transition-colors duration-300;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary/80;
+/* New Keyframes for light mode animations */
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0) scale(1.02); }
+  50% { transform: translateY(-5px) scale(1.02); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes sparkle {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+    opacity: 0;
+  }
+}
+
+@keyframes text-gradient-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes gradient-flow {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(50%); }
+}
+
+/* Remove the line-flow animation since we're not using it anymore */
+@keyframes line-flow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+/* New keyframes for hero background */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes rotate-pattern {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float-around {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(50px, -50px) scale(1.1);
+  }
+  50% {
+    transform: translate(0, -100px) scale(1);
+  }
+  75% {
+    transform: translate(-50px, -50px) scale(0.9);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* New keyframes for enhanced hero effects */
+@keyframes fade-in-out {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slide-in-out {
+  0% {
+    transform: translateX(-100%) scaleX(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0%) scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.5);
+    opacity: 0;
+  }
+}
+
+/* Section background variations */
+.section-background-1, .section-background-2, .section-background-3 {
+  @apply absolute inset-0 -z-10 overflow-hidden pointer-events-none opacity-80;
+}
+
+.section-background-1::before {
+  content: '';
+  @apply absolute inset-0;
+  background: 
+    radial-gradient(circle at 80% 20%, hsl(var(--secondary) / 0.3) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, hsl(var(--accent) / 0.3) 0%, transparent 40%);
+  animation: pulse-glow 12s ease-in-out infinite alternate;
+}
+
+.section-background-2::before {
+  content: '';
+  @apply absolute inset-0;
+  background: 
+    radial-gradient(circle at 30% 30%, hsl(var(--accent) / 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, hsl(var(--primary) / 0.2) 0%, transparent 50%);
+  animation: pulse-glow 15s ease-in-out infinite alternate;
+}
+
+.section-background-3::before {
+  content: '';
+  @apply absolute inset-0;
+  background: 
+    radial-gradient(circle at 20% 20%, hsl(var(--primary) / 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, hsl(var(--accent) / 0.2) 0%, transparent 50%);
+  animation: pulse-glow 15s ease-in-out infinite alternate;
+}
+
+/* Enhanced section divider for Contact section */
+.section-spacer {
+  @apply relative h-px w-full my-16 overflow-hidden;
+  background: linear-gradient(to right,
+    transparent,
+    hsl(var(--primary) / 0.3) 20%,
+    hsl(var(--primary) / 0.4) 50%,
+    hsl(var(--primary) / 0.3) 80%,
+    transparent
+  );
+}
+
+.section-spacer::before {
+  content: '';
+  @apply absolute inset-0;
+  background: linear-gradient(to right,
+    transparent,
+    hsl(var(--primary) / 0.6),
+    transparent
+  );
+  width: 30%;
+  animation: gradient-flow 8s linear infinite;
+}
+
+.section-spacer::after {
+  content: '';
+  @apply absolute top-0 left-0 w-full h-full;
+  background: linear-gradient(to right,
+    transparent,
+    white,
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: sparkle 4s linear infinite;
+}
+
+/* Section patterns */
+.section-pattern-1, .section-pattern-2 {
+  @apply absolute inset-0 -z-10 opacity-50;
+}
+
+.section-pattern-1 {
+  background-image: 
+    linear-gradient(45deg, hsl(var(--primary) / 0.08) 1px, transparent 1px),
+    linear-gradient(-45deg, hsl(var(--primary) / 0.08) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: radial-gradient(circle at 50% 50%, black, transparent 70%);
+  animation: rotate-pattern 180s linear infinite reverse;
+}
+
+.section-pattern-2 {
+  background-image: 
+    radial-gradient(circle at center, hsl(var(--primary) / 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  mask-image: radial-gradient(ellipse at 50% 50%, black, transparent 70%);
+  animation: scale-pattern 15s ease-in-out infinite alternate;
+}
+
+/* Section floating elements */
+.section-floaters-1, .section-floaters-2 {
+  @apply absolute inset-0 -z-10 overflow-hidden opacity-60;
+}
+
+.section-floaters-1 .floating-element,
+.section-floaters-2 .floating-element {
+  @apply absolute rounded-full;
+  filter: blur(40px);
+}
+
+.section-floaters-1 .floating-element:nth-child(1) {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  right: 10%;
+  background: radial-gradient(circle at center, 
+    hsl(var(--secondary) / 0.2),
+    transparent 70%
+  );
+  animation: float-around 25s linear infinite;
+}
+
+.section-floaters-1 .floating-element:nth-child(2) {
+  width: 150px;
+  height: 150px;
+  bottom: 30%;
+  left: 15%;
+  background: radial-gradient(circle at center, 
+    hsl(var(--accent) / 0.2),
+    transparent 70%
+  );
+  animation: float-around 30s linear infinite reverse;
+}
+
+.section-floaters-2 .floating-element:nth-child(1) {
+  width: 250px;
+  height: 250px;
+  top: 20%;
+  left: 10%;
+  background: radial-gradient(circle at center, 
+    hsl(var(--primary) / 0.2),
+    transparent 70%
+  );
+  animation: float-diagonal 20s ease-in-out infinite;
+}
+
+.section-floaters-2 .floating-element:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  bottom: 20%;
+  right: 15%;
+  background: radial-gradient(circle at center, 
+    hsl(var(--accent) / 0.2),
+    transparent 70%
+  );
+  animation: float-diagonal 25s ease-in-out infinite reverse;
+}
+
+/* New animations for section backgrounds */
+@keyframes float-diagonal {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(100px, -100px) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes scale-pattern {
+  0% {
+    background-size: 20px 20px;
+    opacity: 0.5;
+  }
+  100% {
+    background-size: 25px 25px;
+    opacity: 0.8;
+  }
 }

@@ -2,27 +2,167 @@
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    
+    <!-- Performance and Security -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- Favicon with dark/light mode support -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Salvatore - Modern Web Development. Wij creëren moderne, gebruiksvriendelijke websites die bedrijven helpen zich te onderscheiden in de digitale wereld." />
-    <title>Salvatore - Modern Web Development</title>
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Mano Salvatore" />
+    
+    <!-- Primary Meta Tags -->
+    <meta name="description" content="Mano Salvatore - Modern Web Development in Amsterdam. Specialist in het creëren van moderne, gebruiksvriendelijke websites en webapplicaties. Professionele web development services voor bedrijven die willen groeien." />
+    <title>Mano Salvatore - Modern Web Development Amsterdam</title>
 
-    <meta name="author" content="Lovable" />
+    <!-- Author and Contact -->
+    <meta name="author" content="Mano Salvatore" />
+    <meta name="contact" content="info@manosalvatore.com" />
 
-    <meta property="og:title" content="NeonEcho - Ultra Modern Web Experiences" />
-    <meta property="og:description" content="Experience cutting-edge web design with NeonEcho - featuring neumorphic design, 3D elements, and advanced animations." />
+    <!-- Keywords -->
+    <meta name="keywords" content="web development, webdesign, amsterdam, website laten maken, moderne websites, web applicaties, frontend development, react development" />
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Mano Salvatore - Modern Web Development Amsterdam" />
+    <meta property="og:description" content="Specialist in het creëren van moderne, gebruiksvriendelijke websites en webapplicaties. Professionele web development services voor bedrijven die willen groeien." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://manosalvatore.com" />
+    <meta property="og:image" content="https://manosalvatore.com/opengraph-image.png" />
+    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:site_name" content="Mano Salvatore" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:title" content="Mano Salvatore - Modern Web Development" />
+    <meta name="twitter:description" content="Specialist in moderne web development in Amsterdam. Creëer impact met een professionele website." />
+    <meta name="twitter:image" content="https://manosalvatore.com/opengraph-image.png" />
+
+    <!-- Additional SEO -->
+    <link rel="canonical" href="https://manosalvatore.com" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Mano Salvatore",
+      "description": "Modern Web Development in Amsterdam. Specialist in het creëren van moderne, gebruiksvriendelijke websites en webapplicaties.",
+      "image": "https://manosalvatore.com/opengraph-image.png",
+      "url": "https://manosalvatore.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Amsterdam",
+        "addressCountry": "NL"
+      },
+      "priceRange": "€€",
+      "sameAs": [
+        "https://instagram.com/its__salvatore",
+        "https://www.linkedin.com/in/manosalvatore",
+        "https://github.com/itssalvatore"
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Amsterdam"
+      },
+      "knowsAbout": [
+        "Web Development",
+        "React",
+        "Frontend Development",
+        "Modern Websites",
+        "Web Applications"
+      ]
+    }
+    </script>
+
+    <!-- Breadcrumb Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://manosalvatore.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projecten",
+          "item": "https://manosalvatore.com/#projects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Ervaring",
+          "item": "https://manosalvatore.com/#experience"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Contact",
+          "item": "https://manosalvatore.com/#contact"
+        }
+      ]
+    }
+    </script>
+
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Welke web development services biedt Mano Salvatore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mano Salvatore biedt moderne web development services, waaronder het creëren van gebruiksvriendelijke websites en webapplicaties, frontend development met React, en professionele web solutions voor bedrijven die willen groeien."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Waar is Mano Salvatore gevestigd?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mano Salvatore is gevestigd in Amsterdam, Nederland, en bedient klanten in de regio Amsterdam en daarbuiten."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wat voor technologieën gebruikt Mano Salvatore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mano Salvatore werkt met moderne web technologieën zoals React, Next.js, Tailwind CSS, en andere cutting-edge tools om hoogwaardige web oplossingen te creëren."
+          }
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

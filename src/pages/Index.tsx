@@ -26,7 +26,7 @@ const Index = () => {
 
   useEffect(() => {
     // Update page title
-    document.title = 'Salvatore - Modern Web Development';
+    document.title = 'Mano Salvatore - Modern Web Development Amsterdam';
   }, []);
 
   const openPopup = (plan: string) => {

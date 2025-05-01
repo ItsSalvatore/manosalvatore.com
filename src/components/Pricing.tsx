@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import { PopupContext } from '@/pages/Index';
+import ContactPopup from '@/components/ui/ContactPopup';
 
 interface PlanFeature {
   name: string;
@@ -10,8 +13,7 @@ interface PlanFeature {
 interface PricingPlan {
   name: string;
   price: {
-    monthly: number;
-    yearly: number;
+    estimate: string;
   };
   description: string;
   features: PlanFeature[];
@@ -23,8 +25,7 @@ const plans: PricingPlan[] = [
   {
     name: 'Basis Website',
     price: {
-      monthly: 500,
-      yearly: 1000,
+      estimate: '€500 - €1000',
     },
     description: 'Eén pagina ontwerp (10-20 uur)',
     features: [
@@ -42,8 +43,7 @@ const plans: PricingPlan[] = [
   {
     name: 'Meer-Pagina Website',
     price: {
-      monthly: 750,
-      yearly: 1500,
+      estimate: '€750 - €1500',
     },
     description: 'Tot 5 pagina\'s (15-30 uur)',
     features: [
@@ -61,21 +61,19 @@ const plans: PricingPlan[] = [
     buttonText: 'Start Project',
   },
   {
-    name: 'CMS Website',
+    name: 'Maatwerk',
     price: {
-      monthly: 1250,
-      yearly: 2000,
+      estimate: '€50/uur',
     },
-    description: 'Content beheersysteem (25-40 uur)',
+    description: 'Aangepaste oplossingen',
     features: [
-      { name: 'Content beheersysteem', included: true },
-      { name: 'Meerdere pagina\'s', included: true },
-      { name: 'Mobiel responsive', included: true },
-      { name: 'Uitgebreide SEO', included: true },
-      { name: 'Content beheer', included: true },
-      { name: 'Domein (€15/jaar)', included: true },
-      { name: 'Hosting (€10/maand)', included: true },
-      { name: '12 maanden gratis support', included: true },
+      { name: 'Aangepaste functies', included: true },
+      { name: 'Webshop mogelijk', included: true },
+      { name: 'Geavanceerde opties', included: true },
+      { name: 'Integraties op maat', included: true },
+      { name: 'Domein inbegrepen', included: true },
+      { name: 'Hosting inbegrepen', included: true },
+      { name: 'Levenslange support', included: true },
       { name: 'Onbeperkt revisies', included: true },
     ],
     buttonText: 'Start Project',
@@ -83,149 +81,216 @@ const plans: PricingPlan[] = [
 ];
 
 const Pricing = () => {
-  const [billing, setBilling] = useState<'monthly' | 'yearly'>('monthly');
+  const { openPopup, closePopup, isOpen, selectedPlan } = useContext(PopupContext);
+
+  const handlePlanSelect = (planName: string) => {
+    openPopup(planName);
+  };
 
   return (
-    <section id="pakketten" className="py-24 bg-space-dark relative noise-filter">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            Pakketten die <span className="text-gradient">Meegroeien</span>
-          </h2>
-          <p className="text-lg text-white/70 max-w-3xl mx-auto">
-            Kies het ideale pakket voor uw wensen of vraag een oplossing op maat. Alle prijzen gebaseerd op €50/uur tarief.
-          </p>
-          
-          {/* Billing Toggle */}
-          <div className="mt-10 inline-flex items-center p-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
-            <button
-              onClick={() => setBilling('monthly')}
-              className={cn(
-                "px-6 py-2 rounded-full text-sm font-medium transition-colors duration-200",
-                billing === 'monthly' 
-                  ? "bg-electric-red text-white shadow-lg shadow-electric-red/20" 
-                  : "text-white/70 hover:text-white"
-              )}
-            >
-              Maandelijks
-            </button>
-            <button
-              onClick={() => setBilling('yearly')}
-              className={cn(
-                "px-6 py-2 rounded-full text-sm font-medium transition-colors duration-200 relative",
-                billing === 'yearly' 
-                  ? "bg-electric-red text-white shadow-lg shadow-electric-red/20" 
-                  : "text-white/70 hover:text-white"
-              )}
-            >
-              Jaarlijks
-              <span className="absolute -top-2 -right-2 bg-neon-cyan text-space-dark text-xs px-2 py-0.5 rounded-full animate-pulse-slow">
-                -20%
-              </span>
-            </button>
+    <>
+      <section id="pakketten" className="py-24 relative overflow-hidden bg-background/95 dark:bg-background">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern bg-gradient-to-b from-background via-background/95 to-background" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-full h-full max-w-7xl mx-auto">
+            <div className="absolute top-1/4 -left-4 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob opacity-70" />
+            <div className="absolute top-1/3 -right-4 w-72 h-72 bg-secondary/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000 opacity-70" />
+            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-accent/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000 opacity-70" />
           </div>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plans.map((plan, index) => (
-            <div 
-              key={plan.name}
-              className={cn(
-                "relative rounded-2xl transition-all duration-500 group",
-                plan.highlighted 
-                  ? "glass-panel border-electric-red/30" 
-                  : "bg-white/5 border border-white/10"
-              )}
-            >
-              {/* Floating elements for highlighted plan */}
-              {plan.highlighted && (
-                <>
-                  <div className="absolute -top-3 -left-3 w-6 h-6 rounded-full bg-electric-red animate-float" style={{ animationDelay: '0.2s' }}></div>
-                  <div className="absolute -bottom-3 -right-3 w-4 h-4 rounded-full bg-neon-cyan animate-float" style={{ animationDelay: '0.6s' }}></div>
-                  <div className="absolute top-1/4 -right-2 w-3 h-3 rounded-full bg-neon-teal animate-float" style={{ animationDelay: '0.4s' }}></div>
-                </>
-              )}
-              
-              {/* Popular badge */}
-              {plan.highlighted && (
-                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-electric-red text-white text-sm font-medium px-4 py-1 rounded-full">
-                  Meest Populair
-                </div>
-              )}
-              
-              <div className="p-8">
-                <h3 className="text-2xl font-display font-semibold mb-2">{plan.name}</h3>
-                <p className="text-white/60 mb-6">{plan.description}</p>
-                
-                <div className="mb-6">
-                  <div className="flex items-end">
-                    <span className="text-4xl md:text-5xl font-display font-bold">
-                      ${billing === 'monthly' ? plan.price.monthly : plan.price.yearly}
-                    </span>
-                    <span className="text-white/60 ml-2 mb-1">/maand</span>
-                  </div>
-                  {billing === 'yearly' && (
-                    <p className="text-sm text-neon-cyan mt-2">
-                      Jaarlijks gefactureerd (${plan.price.yearly * 12}/jaar)
-                    </p>
-                  )}
-                </div>
-                
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li 
-                      key={featureIndex}
-                      className="flex items-start"
-                    >
-                      <span className={cn(
-                        "rounded-full p-0.5 mt-0.5 mr-3",
-                        feature.included 
-                          ? "bg-electric-red text-white" 
-                          : "bg-white/10 text-white/40"
-                      )}>
-                        <Check className="w-4 h-4" />
-                      </span>
-                      <span className={feature.included ? "text-white/80" : "text-white/40"}>
-                        {feature.name}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <button
-                  className={cn(
-                    "w-full py-3 rounded-xl font-medium transition-all duration-300",
-                    plan.highlighted 
-                      ? "bg-electric-red text-white shadow-lg shadow-electric-red/20 hover:bg-electric-violet" 
-                      : "bg-white/10 text-white hover:bg-white/20"
-                  )}
-                >
-                  {plan.buttonText}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="mt-16 text-center">
-          <p className="text-white/60 mb-4">Een oplossing op maat voor uw bedrijf?</p>
-          <a 
-            href="#contact" 
-            className="inline-flex items-center text-electric-red hover:text-neon-cyan transition-colors duration-300"
+
+        {/* Dark overlay for more depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background/80 backdrop-blur-[2px]" />
+
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            Neem contact op
-            <svg className="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+              Pakketten die <span className="text-gradient bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Meegroeien</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Kies het ideale pakket voor uw wensen of vraag een oplossing op maat. Alle prijzen gebaseerd op €50/uur tarief.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {plans.map((plan, index) => (
+              <motion.div 
+                key={plan.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ 
+                  y: -8,
+                  transition: { duration: 0.2, ease: 'easeOut' }
+                }}
+                className={cn(
+                  "flex flex-col h-full relative rounded-2xl transition-all duration-300",
+                  plan.highlighted 
+                    ? "bg-background/95 backdrop-blur-xl border-2 border-primary/50 shadow-[0_0_30px_-5px] shadow-primary/30" 
+                    : "bg-background/95 backdrop-blur-xl border-2 border-border/50 shadow-[0_8px_30px_-5px] shadow-border/20 hover:shadow-border/30 hover:border-primary/30"
+                )}
+              >
+                {/* Hover glow effect */}
+                <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-primary/30 via-border/5 to-border/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Card inner shadow for depth */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/5 via-transparent to-black/5" />
+                
+                {plan.highlighted && (
+                  <>
+                    <motion.div 
+                      className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground text-sm font-medium px-4 py-1 rounded-full shadow-lg"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <span className="relative inline-flex">
+                        <span>Meest Populair</span>
+                        <span className="absolute -inset-4 rounded-full bg-primary/20 animate-ping" />
+                      </span>
+                    </motion.div>
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-primary/10 via-primary/5 to-transparent opacity-60" />
+                  </>
+                )}
+                
+                <div className="p-8 flex-1 relative">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="relative z-10"
+                  >
+                    <motion.h3 
+                      className="text-2xl font-display font-semibold mb-2 text-foreground"
+                      whileHover={{ x: 2 }}
+                    >
+                      {plan.name}
+                    </motion.h3>
+                    <p className="text-muted-foreground/80 mb-6">{plan.description}</p>
+                    
+                    <motion.div 
+                      className="mb-8"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      <div className="flex items-baseline">
+                        <span className="text-4xl font-display font-bold bg-gradient-to-r from-primary via-primary/90 to-secondary bg-clip-text text-transparent">
+                          {plan.price.estimate}
+                        </span>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                  
+                  <ul className="space-y-4 mb-8 relative z-10">
+                    {plan.features.map((feature, featureIndex) => (
+                      <motion.li 
+                        key={featureIndex}
+                        className="flex items-start group"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 * featureIndex }}
+                        whileHover={{ x: 2 }}
+                      >
+                        <span className="rounded-full p-1 mt-0.5 mr-3 text-primary bg-primary/10 group-hover:bg-primary/20 transition-colors duration-200">
+                          <Check className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
+                        </span>
+                        <span className="text-muted-foreground/90 group-hover:text-foreground transition-colors duration-200">
+                          {feature.name}
+                        </span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="p-8 pt-0 mt-auto relative z-10">
+                  <motion.button
+                    onClick={() => handlePlanSelect(plan.name)}
+                    whileHover={{ 
+                      scale: 1.02,
+                      transition: { duration: 0.2 }
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className={cn(
+                      "w-full py-3 rounded-xl font-medium transition-all duration-300 relative overflow-hidden group",
+                      plan.highlighted 
+                        ? "bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30" 
+                        : "bg-background hover:bg-background/80 border-2 border-border/30 hover:border-primary/50 text-foreground hover:text-primary"
+                    )}
+                  >
+                    <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-200 inline-flex items-center">
+                      {plan.buttonText}
+                      <svg 
+                        className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-200" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2"
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </span>
+                    {plan.highlighted && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                    )}
+                  </motion.button>
+                </div>
+
+                {/* Enhanced corner accents */}
+                <div className="absolute top-0 right-0 w-24 h-24 overflow-hidden opacity-50 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute top-0 right-0 w-[1px] h-20 bg-gradient-to-b from-transparent via-primary to-transparent" />
+                  <div className="absolute top-0 right-0 h-[1px] w-20 bg-gradient-to-r from-transparent via-primary to-transparent" />
+                </div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 overflow-hidden opacity-50 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-0 left-0 w-[1px] h-20 bg-gradient-to-t from-transparent via-primary to-transparent" />
+                  <div className="absolute bottom-0 left-0 h-[1px] w-20 bg-gradient-to-l from-transparent via-primary to-transparent" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.div 
+            className="mt-16 text-center relative z-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <p className="text-muted-foreground/90 mb-4">Een oplossing op maat voor uw bedrijf?</p>
+            <motion.a 
+              href="#contact" 
+              className="inline-flex items-center text-primary hover:text-primary/80 transition-colors duration-300"
+              whileHover={{ x: 5 }}
+            >
+              Neem contact op
+              <svg className="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </motion.a>
+          </motion.div>
         </div>
-      </div>
-      
-      {/* Background Gradient */}
-      <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-electric-red/10 rounded-full filter blur-[100px] -z-10"></div>
-      <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-neon-cyan/10 rounded-full filter blur-[100px] -z-10"></div>
-    </section>
+
+        {/* Popup Container */}
+        <div className="absolute inset-0">
+          <div className="relative w-full h-full">
+            <ContactPopup
+              isOpen={isOpen}
+              onClose={closePopup}
+              selectedPlan={selectedPlan}
+            />
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

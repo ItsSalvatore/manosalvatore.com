@@ -1,33 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import { Phone, Mail, Instagram, Linkedin, Github } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Phone, Mail, Instagram, Linkedin, Github } from 'lucide-react';
-
-const formSchema = z.object({
-  name: z.string().min(2, 'Naam is verplicht'),
-  email: z.string().email('Voer een geldig e-mailadres in'),
-  message: z.string().min(10, 'Bericht moet minimaal 10 karakters bevatten'),
-});
-
-type FormData = z.infer<typeof formSchema>;
 
 const Contact = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const onSubmit = async (data: FormData) => {
-    console.log(data);
-  };
+  useEffect(() => {
+    // Check for success parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+      setShowSuccess(true);
+      // Remove the success parameter from URL after 5 seconds
+      setTimeout(() => {
+        window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+        setShowSuccess(false);
+      }, 5000);
+    }
+  }, []);
 
   const contactInfo = [
     {
@@ -79,6 +72,16 @@ const Contact = () => {
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Heb je een project in gedachten? Neem contact met mij op en laat mij jouw ideeën tot leven brengen.
             </p>
+            {showSuccess && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="mt-4 p-4 bg-green-500/10 text-green-500 rounded-xl border border-green-500/20"
+              >
+                Bedankt voor je bericht! Ik neem zo snel mogelijk contact met je op.
+              </motion.div>
+            )}
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -135,9 +138,11 @@ const Contact = () => {
                 className="space-y-6"
               >
                 {/* FormSubmit Configuration */}
-                <input type="hidden" name="_next" value="https://manosalvatore.com/#contact" />
+                <input type="hidden" name="_next" value="https://manosalvatore.com/#contact?success=true" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_autoresponse" value="Bedankt voor je bericht! Ik neem zo snel mogelijk contact met je op." />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="text" name="_honey" style={{ display: 'none' }} />
 
                 <div>
                   <Input
@@ -176,12 +181,35 @@ const Contact = () => {
                   />
                 </div>
 
-                <Button
+                <button
                   type="submit"
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="w-full py-3 px-4 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-xl font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-200 relative overflow-hidden group"
+                  disabled={isSubmitting}
                 >
-                  Verstuur Bericht
-                </Button>
+                  <span className="relative z-10 inline-flex items-center">
+                    {isSubmitting ? (
+                      <>
+                        <span className="animate-spin mr-2">⏳</span>
+                        Verzenden...
+                      </>
+                    ) : (
+                      <>
+                        Verstuur Bericht
+                        <svg 
+                          className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-200" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2"
+                        >
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </>
+                    )}
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                </button>
               </form>
             </motion.div>
           </div>
